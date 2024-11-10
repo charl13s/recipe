@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Add Recipe</title>
+  </head>
+  <body>
+    <section>
+      <nav>
+        <div class="nav-sections">
+          <ul class="left-section">
+            <li><a href="Index.html">Home</a></li>
+
+            <li><a href="#">Our Story</a></li>
+            <li><a href="recipe.html">Recipes</a></li>
+          </ul>
+          <div class="center-logo">
+            <p>Drinkit</p>
+          </div>
+          <ul class="right-section">
+            <li><a href="#">Media</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+    <section class="add-recipe-section">
+      <div class="add-recipe-container">
+        <h2>Add Your Delicious Drink Recipe!</h2>
+        <form class="recipe-form" id="recipeForm">
+          <div class="form-group">
+            <label for="recipe_name">Recipe Name:</label>
+            <input type="text" id="recipe_name" name="recipe_name" required />
+          </div>
+          <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            <textarea
+              id="ingredients"
+              name="ingredients"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="procedure1">Procedure:</label>
+            <textarea
+              id="procedure1"
+              name="procedure1"
+              rows="8"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="duration">Duration (e.g., 15 minutes):</label>
+            <input type="text" id="duration" name="duration" />
+          </div>
+          <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" />
+          </div>
+          <button type="submit" class="submit-button">Submit Recipe</button>
+        </form>
+      </div>
+    </section>
+  </body>
+
+  <script src="add-recipe.js" defer></script>
+</html>
