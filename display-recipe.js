@@ -5,7 +5,7 @@ const recipeIdInput = document.getElementById('recipe-id-search');
 function displayRecipe(recipe) {
   // Create a link for the recipe card
   const recipeLink = document.createElement('a');
-  recipeLink.href = `/displayrecipe.html?id=${recipe.Recipe_No}`;
+  recipeLink.href = `/recipe_details.html?id=${recipe.Recipe_No}`;
   recipeLink.classList.add('recipe-card');
 
   const recipeDiv = document.createElement('div');

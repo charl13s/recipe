@@ -714,3 +714,41 @@ nav a:hover {
   text-decoration: none; /* Remove underline from link */
   color: inherit; /* Inherit color from parent */
 }
+.recipe-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%; /* Adjust width as needed */
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-details img {
+  max-width: 50%; /* Reduce image size */
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.recipe-details h2 {
+  margin-bottom: 10px;
+  font-size: 2em; /* Increase heading size */
+}
+
+.recipe-details ul {
+  list-style: none;
+  padding-left: 20px; /* Add indentation */
+  margin-bottom: 15px;
+  text-align: center;
+  width: 100%;
+  font-weight: bold; /* Make ingredients bold */
+}
+
+.recipe-details p {
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 1.2em; /* Increase font size for procedure and duration */
+  line-height: 1.6; /* Add line spacing for better readability */
+}
