@@ -697,7 +697,7 @@ nav a:hover {
 
 #search-button { /* Style the search button */
   padding: 10px 15px;
-  background-color: #4CAF50; /* Green background */
+  background-color: orange; /* Green background */
   color: white;
   border: none;
   border-radius: 5px;
@@ -715,6 +715,8 @@ nav a:hover {
   color: inherit; /* Inherit color from parent */
 }
 .recipe-details {
+  background-color: wheat;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -751,4 +753,12 @@ nav a:hover {
   margin-bottom: 10px;
   font-size: 1.2em; /* Increase font size for procedure and duration */
   line-height: 1.6; /* Add line spacing for better readability */
+}
+
+#recipe-detail-body {
+  background-color: black;
+}
+
+#recipe-body {
+  background-color: #64502e;
 }
