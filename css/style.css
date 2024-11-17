@@ -688,11 +688,13 @@ nav a:hover {
 }
 
 #recipe-id-search {
-  padding: 10px;
+  padding: 12px 20px; /* Increase padding */
   border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px; /* Adjust width as needed */
+  border-radius: 25px; /* More rounded corners */
+  width: 300px; /* Wider input box */
   margin-right: 10px;
+  font-size: 16px; /* Larger font size */
+
 }
 
 #search-button { /* Style the search button */
@@ -756,9 +758,16 @@ nav a:hover {
 }
 
 #recipe-detail-body {
-  background-color: black;
+  background-color: #64502e;
 }
 
 #recipe-body {
   background-color: #64502e;
+}
+
+#search-bar {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;    /* Center vertically (optional) */
+  margin-bottom: 20px;   /* Add some space below the search bar */
 }

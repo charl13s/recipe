@@ -18,8 +18,37 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
+app.post('/signup', (req, res) => {
+    const { fullName, email, phoneNo, password } = req.body;
+  
+    // Hash the password (make sure you have bcrypt installed)
+    bcrypt.hash(password, 10, (err, hash) => { 
+      if (err) {
+        console.error('Error hashing password:', err);
+        res.status(500).send('Error creating account.');
+        return;
+      }
+  
+      const sql = `
+        INSERT INTO Users (Username, Email, PhoneNo, Password) 
+        VALUES (?, ?, ?, ?)
+      `;
+  
+      db.query(sql, [fullName, email, phoneNo, hash], (err, result) => {
+        if (err) {
+          console.error('Error creating account:', err);
+          res.status(500).send('Error creating account.');
+          return;
+        }
+        console.log('Account created successfully!');
+        res.status(200).send('Account created.'); 
+      });
+    });
+  });
 
 app.post('/recipe', upload.single('image'), (req, res) => {
     const recipeName = req.body.recipe_name;

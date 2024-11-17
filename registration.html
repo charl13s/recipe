@@ -17,17 +17,18 @@
     />
     <!-- Main Style Css -->
     <link rel="stylesheet" href="css/style.css" />
+
   </head>
   <body class="form-v5">
     <div class="page-content">
       <div class="form-v5-content">
-        <form class="form-detail" action="#" method="post">
+        <form class="form-detail" id="registrationForm">
           <h2>Registration</h2>
           <div class="form-row">
             <label for="full-name">Full Name</label>
             <input
               type="text"
-              name="full-name"
+              name="fullName"
               id="full-name"
               class="input-text"
               placeholder="Your Name"
@@ -39,7 +40,7 @@
             <label for="your-email">Email</label>
             <input
               type="text"
-              name="your-email"
+              name=" email"
               id="your-email"
               class="input-text"
               placeholder="Your Email"
@@ -49,15 +50,15 @@
             <i class="fas fa-envelope"></i>
           </div>
           <div class="form-row">
-            <label for="your-email">Phone Number</label>
+            <label for="your-phone">Phone Number</label>
             <input
               type="text"
-              name="your-email"
-              id="your-email"
+              name=" phoneNo"
+              id="your-phone"
               class="input-text"
-              placeholder="Your Email"
+              placeholder="Your Phone Number"
               required
-              pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
+              
             />
             <i class="fas fa-phone"></i>
           </div>
@@ -88,4 +89,6 @@
       </div>
     </div>
   </body>
+
+  <script src="signup.js"></script>
 </html>
