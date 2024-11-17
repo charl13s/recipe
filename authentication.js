@@ -1,3 +1,5 @@
+
+
 const authButtons = document.getElementById('auth-buttons');
 
 function updateAuthButtons() {
