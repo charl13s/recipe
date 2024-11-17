@@ -4,8 +4,15 @@ const mysql = require('mysql');
 const app = express();
 const path = require('path');
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 const db = require('./db.config');
+
+app.use(session({
+    secret: 'key', 
+    resave: false,
+    saveUninitialized: true
+  }));
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -56,37 +63,39 @@ app.post('/signup', (req, res) => {
 app.post('/signin', (req, res) => {
     const { email, password } = req.body;
   
-    const sql = `SELECT * FROM users WHERE Email = ?`; 
-  
-    db.query(sql, [email], (err, result) => {
-      if (err)   
-   {
-        console.error('Error during sign in:', err);
-        res.status(500).send('Error during sign in.');
-        return;
+    // 2. Retrieve user from the database
+  const sql = `SELECT * FROM Users WHERE Email = ?`;
+  db.query(sql, [email], (err, result) => {
+    if (err) {
+      console.error('Error during sign in:', err);
+      return res.status(500).send('Error during sign in.');
+    }
+
+    // 3. Check if user exists
+    if (result.length === 0) {
+      return res.status(401).send('Invalid email or password.');
+    }
+
+    const user = result[0];
+
+    // 4. Compare passwords
+    bcrypt.compare(password, user.Password, (err, match) => {
+      if (err) {
+        console.error('Error comparing passwords:', err);
+        return res.status(500).send('Error    during sign in.');
       }
-  
-      if (result.length === 0) {
-        res.status(401).send('Invalid email or password.'); 
+
+      if (match) {
+        console.log('Sign in successful!');
+        const userNo = user.User_No;
+        req.session.userNo = userNo;
+        return res.redirect('/index.html');
       } else {
-        const user = result[0];
-        bcrypt.compare(password, user.Password, (err, match) => {
-          if (err) {
-            console.error('Error comparing passwords:', err);
-            res.status(500).send('Error during sign in.');
-            return;
-          }
-  
-          if (match) {
-            console.log('Sign in successful!');
-            res.redirect('/index.html');
-          } else {
-            res.status(401).send('Invalid email or password.'); 
-          }
-        });
+        return res.status(401).send('Invalid email or password.');
       }
     });
   });
+});
   
   
 
@@ -103,7 +112,7 @@ app.post('/recipe', upload.single('image'), (req, res) => {
         VALUES (?, ?, ?, ?, ?, ?)
     `;
 
-  const userNo = 1; // Replace with your actual logic to get User_No
+    const userNo = req.session.userNo;
 
   db.query(sql, [recipeName, ingredients, procedure1, duration, image, userNo], (err, result) => {
     if (err) {
@@ -139,9 +148,7 @@ app.get('/recipes', (req, res) => {
   });
 });
 
-app.get('/signin.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'signin.html'));
-  });
+
 app.listen(3100, () => {
   console.log('Server listening on port 3100');
 });
