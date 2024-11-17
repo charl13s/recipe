@@ -18,7 +18,7 @@ form.addEventListener('submit', (event) => {
   .then(response => {
     if (response.ok) {
     
-      window.location.href = '/signin.html?message=Account created successfully!'; 
+      window.location.href = '/signin.html'; 
     } else {
       alert('Error creating account. Please try again.');
     }
