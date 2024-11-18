@@ -96,6 +96,17 @@ app.post('/signin', (req, res) => {
     });
   });
 });
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => { 
+    if (err) {
+      console.error('Error destroying session:', err);
+      res.status(500).send('Logout failed');
+    } else {
+      res.send('Logout successful'); 
+    }
+  });
+});
   
   
 
