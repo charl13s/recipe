@@ -32,6 +32,31 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.post('/api/signup', (req, res) => {
+  const { name, email, password } = req.body;
+
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) {
+      console.error('Error hashing password:', err);
+      return res.status(500).send('Error creating API user.');
+    }
+
+    const sql = `
+      INSERT INTO Users (Username, Email, Password, isAPIUser) 
+      VALUES (?, ?, ?, ?)
+    `;
+
+    db.query(sql, [name, email, hash, 1], (err, result) => { // Set isAPIUser to 1
+      if (err) {
+        console.error('Error creating API user:', err);
+        return res.status(500).send('Error creating API user.');
+      }
+      console.log('API user created successfully!');
+      return res.status(200).send('API user created.');
+    });
+  });
+});
+
 // Sign up route
 app.post('/signup', (req, res) => {
   const { fullName, email, phoneNo, password } = req.body;
@@ -43,11 +68,11 @@ app.post('/signup', (req, res) => {
     }
 
     const sql = `
-      INSERT INTO Users (Username, Email, PhoneNo, Password) 
-      VALUES (?, ?, ?, ?)
+      INSERT INTO Users (Username, Email, PhoneNo, Password, Gender) 
+      VALUES (?, ?, ?, ?, ?)
     `;
 
-    db.query(sql, [fullName, email, phoneNo, hash], (err, result) => {
+    db.query(sql, [fullName, email, phoneNo, hash, gender], (err, result) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
           if (err.sqlMessage.includes('key \'users.Username\'')) {
@@ -182,6 +207,19 @@ app.get('/recipe/:id', (req, res) => {
 
 app.get('/signin.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'signin.html'));
+});
+app.get('/users/gender/:gender', authenticateAPIUser, (req, res) => {
+  const gender = req.params.gender;
+
+  const sql = `SELECT * FROM Users WHERE Gender = ?`;
+
+  db.query(sql, [gender], (err, result) => {
+    if (err) {
+      console.error('Error fetching users by gender:', err);
+      return res.status(500).send('Error fetching users.');
+    }
+    return res.json(result);
+  });
 });
 
 app.listen(3100, () => {

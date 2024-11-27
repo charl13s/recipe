@@ -7,13 +7,14 @@ form.addEventListener('submit', (event) => {
   const email = document.getElementById('your-email').value;
   const phoneNo = document.getElementById('your-phone').value;
   const password = document.getElementById('password').value;
+  const gender = document.getElementById('gender').value;
 
   fetch('/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ fullName, email, phoneNo, password })
+    body: JSON.stringify({ fullName, email, phoneNo, password,  gender })
   })
   .then(response => {
     if (response.ok) {
