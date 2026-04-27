@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const dbConfig = {
     host: 'localhost', 
     user: 'root',
-    password: '693369',
+    password: '',
     database: 'recipedt' 
 };
 
